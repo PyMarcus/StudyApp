@@ -5,22 +5,21 @@ import 'package:study_app/features/number_trivia/domain/entities/number_trivia.d
 import 'package:study_app/features/number_trivia/domain/repositories/number_trivia_repository.dart';
 import 'package:study_app/usecases/usecase.dart';
 
-class GetNumberTriviaUsecase implements Usecase<NumberTrivia, Params> {
+class GetRandomNumberTriviaUsecase implements Usecase<NumberTrivia, NoParams> {
+
   final NumberTriviaRepository repository;
 
-  GetNumberTriviaUsecase({required this.repository});
+  const GetRandomNumberTriviaUsecase({required this.repository});
 
   @override
-  Future<Either<Failure, NumberTrivia>> call(Params param) async {
-    return await repository.getNumberTriviaByNumber(param.number);
+  Future<Either<Failure, NumberTrivia>> call(NoParams params) async{
+    return await repository.getNumberTriviaByRandom();
   }
+  
 }
 
-class Params extends Equatable {
-  final int number;
+class NoParams extends Equatable {
 
-  const Params({required this.number});
-
-  @override
-  List<Object?> get props => [number];
+  @override 
+  List<Object?> get props => [];
 }
